@@ -10,6 +10,7 @@ services:
     stdin_open: true
     volumes:
       - /home/kewtons-agx/media:/home/mnt
+    # 外部からのアクセスを許可する。ポート番号は8801
     command: jupyter lab --ip=* --port 8801 --allow-root
   jetpack2:
     build:
@@ -31,4 +32,5 @@ services:
     stdin_open: true
     volumes:
       - /home/kewtons-agx/media:/home/mnt
+    # 外部からのアクセスを許可する。ポート番号は8802
     command: jupyter lab --ip=* --port 8802 --allow-root
