@@ -1,5 +1,7 @@
 version: "3.7"
 services:
+  # ①tensorflowがセットアップされた環境
+  # jupyterのポート番号:8801, pw=nvidia
   jetpack1:
     build:
       context: .
@@ -12,17 +14,9 @@ services:
       - /home/kewtons-agx/media:/home/mnt
     # 外部からのアクセスを許可する。ポート番号は8801
     command: jupyter lab --ip=* --port 8801 --allow-root
+  # ②pytorchがセットアップされた環境
+  # jupyterのポート番号:8802, pw=nvidia
   jetpack2:
-    build:
-      context: .
-      dockerfile: ml/Dockerfile
-    container_name: myjet_ml
-    runtime: nvidia
-    network_mode: host
-    stdin_open: true
-    volumes:
-      - /home/kewtons-agx/media:/home/mnt
-  jetpack3:
     build:
       context: .
       dockerfile: py/Dockerfile
@@ -34,3 +28,15 @@ services:
       - /home/kewtons-agx/media:/home/mnt
     # 外部からのアクセスを許可する。ポート番号は8802
     command: jupyter lab --ip=* --port 8802 --allow-root
+  # ③機械学習全般がセットアップされた環境
+  # jupyterのポート番号:8888, pw=nvidia
+  jetpack3:
+    build:
+      context: .
+      dockerfile: ml/Dockerfile
+    container_name: myjet_ml
+    runtime: nvidia
+    network_mode: host
+    stdin_open: true
+    volumes:
+      - /home/kewtons-agx/media:/home/mnt

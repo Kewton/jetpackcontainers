@@ -1,10 +1,12 @@
 # 概要
 Jetson AGX Xavierは手のひらサイズの小型マシンですが、ワークステーション並の計算能力を誇り、CPUメモリ16GB、GPUメモ16GBを誇ります。<br>
 ここでは、コンテナ技術を使用してJetson AGX Xavier上に複数のAI実行環境を構築します。<br>
-　「①tensorflowがセットアップされた環境」と「②pytorchがセットアップされた環境」と「③機械学習全般がセットアップされた環境」の３つの環境を構築します。
-    - https://catalog.ngc.nvidia.com/orgs/nvidia/containers/l4t-tensorflow
-    - https://catalog.ngc.nvidia.com/orgs/nvidia/containers/l4t-pytorch
-    - https://catalog.ngc.nvidia.com/orgs/nvidia/containers/l4t-ml
+
+「①tensorflowがセットアップされた環境」と「②pytorchがセットアップされた環境」と「③機械学習全般がセットアップされた環境」の３つの環境を構築します。<br>
+
+- https://catalog.ngc.nvidia.com/orgs/nvidia/containers/l4t-tensorflow
+- https://catalog.ngc.nvidia.com/orgs/nvidia/containers/l4t-pytorch
+- https://catalog.ngc.nvidia.com/orgs/nvidia/containers/l4t-ml
 
 # コンテナ環境の構築
 ## Jetson AGX Xavierのセットアップ
