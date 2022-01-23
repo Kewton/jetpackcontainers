@@ -1,0 +1,5 @@
+{
+  "NotebookApp": {
+    "password": "argon2:$argon2id$v=19$m=10240,t=10,p=8$MpMp1k2OzjaNIi0/ncJLcg$+0NH8DPCu3Bthro3FHVc0hDtqc6Pe5trfeJ0IyP7QCQ"
+  }
+}

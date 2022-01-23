@@ -1,0 +1,34 @@
+version: "3.7"
+services:
+  jetpack1:
+    build:
+      context: .
+      dockerfile: tf/Dockerfile
+    container_name: myjet_tf
+    runtime: nvidia
+    network_mode: host
+    stdin_open: true
+    volumes:
+      - /home/kewtons-agx/media:/home/mnt
+    command: jupyter lab --ip=* --port 8801 --allow-root
+  jetpack2:
+    build:
+      context: .
+      dockerfile: ml/Dockerfile
+    container_name: myjet_ml
+    runtime: nvidia
+    network_mode: host
+    stdin_open: true
+    volumes:
+      - /home/kewtons-agx/media:/home/mnt
+  jetpack3:
+    build:
+      context: .
+      dockerfile: py/Dockerfile
+    container_name: myjet_py
+    runtime: nvidia
+    network_mode: host
+    stdin_open: true
+    volumes:
+      - /home/kewtons-agx/media:/home/mnt
+    command: jupyter lab --ip=* --port 8802 --allow-root
