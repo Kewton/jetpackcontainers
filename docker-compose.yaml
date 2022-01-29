@@ -19,7 +19,7 @@ services:
   jetpack2:
     build:
       context: .
-      dockerfile: py/Dockerfile
+      dockerfile: pth/Dockerfile
     container_name: myjet_py
     runtime: nvidia
     network_mode: host

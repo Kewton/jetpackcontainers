@@ -8,15 +8,15 @@ Jetson AGX Xavierは手のひらサイズの小型マシンですが、ワーク
 - https://catalog.ngc.nvidia.com/orgs/nvidia/containers/l4t-pytorch
 - https://catalog.ngc.nvidia.com/orgs/nvidia/containers/l4t-ml
 
-# コンテナ環境の構築
-## Jetson AGX Xavierのセットアップ
+# Jetson AGX Xavierのセットアップ
+## Dockerのセットアップ
 1. アプリケーションの最新化
     ```
     sudo apt update
     sudo apt upgrade
     ```
 
-1. jetsonでは、sudo apt upgradeをするとDockerコンテナがうまく動作しなくなるのでグレードダウンを実施
+1. jetsonでは、sudo apt upgradeをするとDockerコンテナがうまく動作しなくなるのでcontainerのグレードダウンを実施
     - https://forums.developer.nvidia.com/t/docker-containers-wont-run-after-recent-apt-get-upgrade/194369/15
     ```
     wget https://launchpad.net/ubuntu/+source/docker.io/20.10.2-0ubuntu1~18.04.2/+build/21335731/+files/docker.io_20.10.2-0ubuntu1~18.04.2_arm64.deb
@@ -24,13 +24,16 @@ Jetson AGX Xavierは手のひらサイズの小型マシンですが、ワーク
     rm docker.io_20.10.2-0ubuntu1~18.04.2_arm64.deb
     sudo apt install containerd=1.5.2-0ubuntu1~18.04.3
     ```
-1. gpu確認用ツールのインストール
+
+## リソース使用状況確認ツールのインストール
+1. タスクマネージャー相当のリソースの使用状況確認用ツールをインストール
     ```
     sudo apt install python-pip
     sudo -H pip install jetson-stats
     sudo jtop
     ```
-## Jetson AGX Xavierのセットアップ
+
+## SDカードのマウント
 - Jetson AGX Xavierは標準ではディスクが32GBしかないのでSDカードをマウントします。
 1. exfatを使用可能にする
     ```
@@ -60,35 +63,22 @@ Jetson AGX Xavierは手のひらサイズの小型マシンですが、ワーク
         ```
         UUID=A833-362D       /home/kewtons-agx/media auto    defaults        0       0
         ```
+
+# コンテナ環境の構築
 ## コンテナ環境構築
-1. docker-composeをクローンして実行
+1. 必要な資産をダウンロードします
     ```
     rm -rf jetpackcontainers
     git clone https://github.com/Kewton/jetpackcontainers.git
-    docker-compose -f jetpackcontainers/docker-compose.yaml up --build -d
     ```
 
-# よく使用するコマンド
-## 再起動
-```
-sudo shutdown -r now
-```
-
-## 指定した間隔でコマンドを実行
-```
-watch -n 1 docker ps -a
-```
-
-## 指定した間隔でプロセスを確認
-```
-top -d 1
-```
-
-## SCPでディレクトリ毎ファイル転送
-- ローカルのターミナルで実行
-```
-scp -r chap02 <user>@<ip>:<dir>
-```
+1. imageを構築・コンテナを構築しバックグラウンドでコンテナを起動
+    ```
+    docker-compose -f jetpackcontainers/docker-compose.yaml up --build -d
+    ```
+    - up：コンテナの構築・起動
+    - --build：image構築
+    - -d：デタッチモード。バックグラウンドで実行
 
 # dockerコマンド整理
 1. docker-composeを使用してdockerをrun
@@ -113,3 +103,25 @@ scp -r chap02 <user>@<ip>:<dir>
     ```
     docker exec -it <name> sh
     ```
+
+# ubuntuでよく使用するコマンド
+## 再起動
+```
+sudo shutdown -r now
+```
+
+## 指定した間隔でコマンドを実行
+```
+watch -n 1 docker ps -a
+```
+
+## 指定した間隔でプロセスを確認
+```
+top -d 1
+```
+
+## SCPでディレクトリ毎ファイル転送
+- ローカルのターミナルで実行
+```
+scp -r chap02 <user>@<ip>:<dir>
+```
