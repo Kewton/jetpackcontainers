@@ -85,6 +85,7 @@ https://catalog.ngc.nvidia.com/orgs/nvidia/containers/l4t-ml
     cd <作業用ディレクトリ>
     rm -rf jetpackcontainers
     git clone https://github.com/Kewton/jetpackcontainers.git
+    export docker_vol=<マウントするディレクトリ>
     ```
 
 1. imageを構築・コンテナを構築しバックグラウンドでコンテナを起動
