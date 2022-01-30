@@ -21,7 +21,7 @@ https://catalog.ngc.nvidia.com/orgs/nvidia/containers/l4t-pytorch
 https://catalog.ngc.nvidia.com/orgs/nvidia/containers/l4t-ml
 
 
-# Jetson AGX Xavierのセットアップ
+# Jetsonのセットアップ
 ## Dockerのセットアップ
 1. アプリケーションの最新化
     ```
@@ -81,6 +81,8 @@ https://catalog.ngc.nvidia.com/orgs/nvidia/containers/l4t-ml
 ## コンテナ環境構築
 1. 必要な資産をダウンロードします
     ```
+    mkdir <作業用ディレクトリ>
+    cd <作業用ディレクトリ>
     rm -rf jetpackcontainers
     git clone https://github.com/Kewton/jetpackcontainers.git
     ```
@@ -104,17 +106,17 @@ https://catalog.ngc.nvidia.com/orgs/nvidia/containers/l4t-ml
     # 停止中のコンテナも全て一覧表示
     docker ps --all
     ```
-1. Stop
+1. 実行中のコンテナにbashでログイン
+    ```
+    docker exec -it <name> bash
+    ```
+1. コンテナを停止する
     ```
     docker stop <name>
     ```
-1. 停まったコンテナを削除 (Remove)
+1. 停止中のコンテナを削除する (Remove)
     ```
     docker rm <name>
-    ```
-1. 実行中のコンテナにshでログイン
-    ```
-    docker exec -it <name> sh
     ```
 
 # ubuntuでよく使用するコマンド
@@ -136,5 +138,5 @@ top -d 1
 ## SCPでディレクトリ毎ファイル転送
 - ローカルのターミナルで実行
 ```
-scp -r chap02 <user>@<ip>:<dir>
+scp -r <from_dir> <user>@<ip>:<to_dir>
 ```
