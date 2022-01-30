@@ -1,12 +1,25 @@
 # 概要
-Jetson AGX Xavierは手のひらサイズの小型マシンですが、ワークステーション並の計算能力を誇り、CPUメモリ16GB、GPUメモ16GBを誇ります。<br>
-ここでは、コンテナ技術を使用してJetson AGX Xavier上に複数のAI実行環境を構築します。<br>
+NVIDIAの組み込みシングルボードコンピュータであるJetson上にコンテナ技術を使用して複数のAI実行環境を構築します。<br>
+Jetsonを使用する理由は３つです。
 
-「①tensorflowがセットアップされた環境」と「②pytorchがセットアップされた環境」と「③機械学習全般がセットアップされた環境」の３つの環境を構築します。<br>
+- 安価にCUDAが使用できる（数万円〜）
+- Jetpack SDKとNvidia NGCによりすぐに使えるコンテナが用意されている
+- 小型（手のひらサイズ）かつ高電力効率により手軽に始めるられる
 
-- https://catalog.ngc.nvidia.com/orgs/nvidia/containers/l4t-tensorflow
-- https://catalog.ngc.nvidia.com/orgs/nvidia/containers/l4t-pytorch
-- https://catalog.ngc.nvidia.com/orgs/nvidia/containers/l4t-ml
+ここでは、Nvidia NGCに用意されているコンテナイメージを使用して下記の３つの環境を構築します<br>
+
+&#9312; tensorflowがセットアップされた環境<br>
+- コンテナイメージ<br>
+https://catalog.ngc.nvidia.com/orgs/nvidia/containers/l4t-tensorflow
+
+&#9313; pytorchがセットアップされた環境<br>
+- コンテナイメージ<br>
+https://catalog.ngc.nvidia.com/orgs/nvidia/containers/l4t-pytorch
+
+&#9314; 機械学習全般がセットアップされた環境<br>
+- コンテナイメージ<br>
+https://catalog.ngc.nvidia.com/orgs/nvidia/containers/l4t-ml
+
 
 # Jetson AGX Xavierのセットアップ
 ## Dockerのセットアップ
@@ -34,7 +47,7 @@ Jetson AGX Xavierは手のひらサイズの小型マシンですが、ワーク
     ```
 
 ## SDカードのマウント
-- Jetson AGX Xavierは標準ではディスクが32GBしかないのでSDカードをマウントします。
+- Jetsonは標準ではディスク容量が少ないのでSDカードをマウントします。
 1. exfatを使用可能にする
     ```
     sudo add-apt-repository universe
@@ -44,9 +57,9 @@ Jetson AGX Xavierは手のひらサイズの小型マシンですが、ワーク
 
 1. SDカードマウント
     ```
-    cd /home/kewtons-agx
+    cd <ディレクトリ>
     mkdir media
-    sudo mount /dev/sda1 /home/kewtons-agx/media/
+    sudo mount /dev/sda1 <ディレクトリ>/media/
     ```
 
 1. ubuntu起動時にマウント
@@ -61,7 +74,7 @@ Jetson AGX Xavierは手のひらサイズの小型マシンですが、ワーク
         vi /etc/fstab
         ```
         ```
-        UUID=A833-362D       /home/kewtons-agx/media auto    defaults        0       0
+        UUID=A833-362D       <ディレクトリ>/media auto    defaults        0       0
         ```
 
 # コンテナ環境の構築
