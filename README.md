@@ -85,11 +85,15 @@ https://catalog.ngc.nvidia.com/orgs/nvidia/containers/l4t-ml
     cd <作業用ディレクトリ>
     rm -rf jetpackcontainers
     git clone https://github.com/Kewton/jetpackcontainers.git
-    export docker_vol=<マウントするディレクトリ>
     ```
 
 1. imageを構築・コンテナを構築しバックグラウンドでコンテナを起動
     ```
+    # 各コンテナの/home/mntにマウントするローカルマシンのディレクトリを指定します
+    # ※3つのコンテナで共通です
+    export docker_vol=<マウントするディレクトリ>
+    
+    # コンテナの起動
     docker-compose -f jetpackcontainers/docker-compose.yaml up --build -d
     ```
     - up：コンテナの構築・起動
