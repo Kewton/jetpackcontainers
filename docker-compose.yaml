@@ -11,7 +11,7 @@ services:
     network_mode: host
     stdin_open: true
     volumes:
-      - "${docker_vol}":/home/mnt
+      - $(docker_vol):/home/mnt
     # 外部からのアクセスを許可する。ポート番号は8801
     command: jupyter lab --ip=* --port 8801 --allow-root
   # ②pytorchがセットアップされた環境
@@ -25,7 +25,7 @@ services:
     network_mode: host
     stdin_open: true
     volumes:
-      - "${docker_vol}":/home/mnt
+      - ${docker_vol}:/home/mnt
     # 外部からのアクセスを許可する。ポート番号は8802
     command: jupyter lab --ip=* --port 8802 --allow-root
   # ③機械学習全般がセットアップされた環境
@@ -39,4 +39,4 @@ services:
     network_mode: host
     stdin_open: true
     volumes:
-      - "${docker_vol}":/home/mnt
+      - ${docker_vol}:/home/mnt
